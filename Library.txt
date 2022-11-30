@@ -1,0 +1,54 @@
+create database LibraryOneOne1
+use LibraryOneOne1
+
+create table library(Library_Id int not null primary key,
+					Library_Name varchar(50),
+					Library_address varchar(50))
+
+
+create  table Book(Book_Id int not null primary key,
+					Book_Name varchar(50),
+					Book_Title varchar(50),
+					Book_Auther varchar(50),
+					Total_Book int,
+					Book_publisher varchar(50),
+					Publisher_number int,
+					Publisher_Date date)
+
+create table Student(Student_id int not null primary key,
+					Student_Name varchar(50),
+					Student_FName varchar(50),
+					Student_Gender varchar(50),
+					Student_Age int,
+					Student_Email varchar(50),
+					Studeny_Phon int,
+					Library_Id int,
+		constraint Lib_Id foreign key (Library_Id) references library (Library_Id))
+
+create table Borrowing(Borrowing_Id int not null primary key,
+						Borrowing_Date date,
+						Borrowing_return_Date date,
+						Book_Id int,
+						constraint Book_Id foreign key (Book_Id) references Book(Book_Id),
+						Student_id int,
+						constraint Stu_Id foreign key (Student_id) references Student(Student_id))
+
+
+create table Transiction(Transiction_Id int not null primary key,
+						Transiction_Name varchar(50),
+						Student_Id int,
+						Borrowing_Id int,
+						
+						constraint Stude_Id foreign key (Student_id) references Student(Student_id),
+						
+						constraint Borr_Id foreign key (Borrowing_Id) references Borrowing(Borrowing_Id),
+
+						Tranciction_Date date)
+
+create table Report(Report_Id int not null primary key,
+					Report_Date date,
+					Borrowing_Id int,
+					constraint Borrow_Id foreign key (Borrowing_Id) references Borrowing(Borrowing_Id),
+					Transiction_Id int,
+					constraint Trancicwrg_Id foreign key (Transiction_Id) references Transiction(Transiction_Id))
+					
